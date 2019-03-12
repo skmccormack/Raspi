@@ -13,8 +13,8 @@ class Clipping(State):
     data_out = {pot, addr, pot.value}
   def next(self, input):
     if input == 1:
-      return Filters.LowPass
-    return Filters.Clipping
+      return Filters.lowpass
+    return Filters.clipping
 
 class LowPass(State):
   def run(self):
@@ -22,8 +22,8 @@ class LowPass(State):
     data_out = {pot, addr, pot.value}
   def next(self, input):
     if input == 1:
-      return Filters.HighPass
-    return Filters.LowPass
+      return Filters.highpass
+    return Filters.lowpass
 
 class HighPass(State):
   def run(self):
@@ -31,8 +31,8 @@ class HighPass(State):
     data_out = {pot, addr, pot.value}
   def next(self, input):
     if input == 1:
-      return Filters.BandPass
-    return Filters.HighPass
+      return Filters.bandpass
+    return Filters.highpass
   
 class BandPass(State):
   def run(self):
@@ -40,8 +40,8 @@ class BandPass(State):
     data_out = {pot, addr, pot.value}
   def next(self, input):
     if input == 1:
-      return Filters.BandStop
-    return Filters.BandPass
+      return Filters.bandstop
+    return Filters.bandpass
   
 class BandStop(State):
   def run(self):
@@ -50,9 +50,17 @@ class BandStop(State):
   def next(self, input):
     if input == 1:
       return Filters.Clipping
-    return Filters.BandStop
+    return Filters.bandstop
   
 class Filters(StateMachine):
   def __init__(self):
     #Intial State
-    StateMachine.__init__(self.Filters.Clipping)
+    StateMachine.__init__(self.Filters.clipping)
+    
+# Static variable initialization:
+Filters.clipping = Clipping()
+Filters.lowpass = LowPass()
+Filters.highpass = HighPass()
+Filters.bandstop = BandStop()
+Filters.bandpass = BandPass()
+    
