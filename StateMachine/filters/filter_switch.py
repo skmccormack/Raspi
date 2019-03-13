@@ -135,3 +135,6 @@ Filters.highpass = HighPass()
 Filters.bandstop = BandStop()
 Filters.bandpass = BandPass()
     
+buttonspressed = map(string.strip, open("textfile").readlines())
+buttonsPressed = map(Buttons, buttonspressed)
+Filters().runAll(buttonsPressed)
