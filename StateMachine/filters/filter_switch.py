@@ -23,16 +23,16 @@ bsq = Devices(100)  #initial value
 
 #Function to change pot value with vertical buttons
 def ValueChangeV(value):
-  if ButtonPress.up == 1:
+  if input == ButtonPress.up:
     value = value + inc
-  if ButtonPress.down == 1:
+  if input == ButtonPress.down:
     value = value - inc
     
 #Function to change pot value with horizontal buttons
 def ValueChangeH(value):
-  if ButtonPress.right == 1:
+  if input == ButtonPress.right:
     value = value + inc
-  if ButtonPress.left == 1:
+  if input == ButtonPress.left:
     value = value - inc
 
 # A different subclass for each state:
@@ -42,7 +42,7 @@ class Clipping(State):
     data_out = {addr, 0b00, clip.value}    #NEEDS FIXING
     #turn on clipping device cs, set MOSI to data out, turn off cs
   def next(self, input):
-    if input == 1:
+    if input == ButtonPress.select:
       return Filters.lowpass
     return Filters.clipping
 
@@ -55,7 +55,7 @@ class LowPass(State):
     data_out = {addr, 0b00, lpc.value}   #NEEDS FIXING
     #turn on lpc device cs, set MOSI to data out, turn off cs
   def next(self, input):
-    if input == 1:
+    if input == ButtonPress.select:
       return Filters.highpass
     return Filters.lowpass
 
@@ -68,7 +68,7 @@ class HighPass(State):
     data_out = {addr, 0b00, hpc.value}   #NEEDS FIXING
     #turn on hpc device cs, set MOSI to data out, turn off cs
   def next(self, input):
-    if input == 1:
+    if input == ButtonPress.select:
       return Filters.bandpass
     return Filters.highpass
   
@@ -81,7 +81,7 @@ class BandPass(State):
     data_out = {addr, 0b00, bpc.value}   #NEEDS FIXING
     #turn on bpc device cs, set MOSI to data out, turn off cs
   def next(self, input):
-    if input == 1:
+    if input == ButtonPress.select:
       return Filters.bandstop
     return Filters.bandpass
   
@@ -94,7 +94,7 @@ class BandStop(State):
     data_out = {addr, 0b00, bsc.value}   #NEEDS FIXING
     #turn on bsc device cs, set MOSI to data out, turn off cs
   def next(self, input):
-    if input == 1:
+    if input == ButtonPress.select:
       return Filters.Clipping
     return Filters.bandstop
   
