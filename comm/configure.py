@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import spidev
 
 #To set numbing system
 GPIO.setmode(GPIO.BOARD)
@@ -45,14 +46,23 @@ GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW)   #Clipping (dual)
 def comtodual(pot, value):
   GPIO.output(pot, 1)
   time.sleep(0.00000006)
-  #MOSI line command
+  wiper0writeAddr = 0x00;
+  wiper1writeAddr = 0x10;
+  spi.xfer([wiper0writeAddr, value])
+  GPIO.output(pot, 0)
+  GPIO.output(pot, 1)
+  time.sleep(0.00000006)
+  spi.xfer([wiper1writeAddr, value])
+  GPIO.output(pot, 0)
   
 def comtosing(pot, value):
   GPIO.output(pot, 1)
   time.sleep(0.00000006)
-  #MOSI line command
+  wiperwriteAddr = 0x00;
+  spi.xfer([wiperwriteAddr, value])
   
 def comtosw(pot, value):
   GPIO.output(pot, 1)
   time.sleep()
   #MOSI line command
+  GPIO.output(pot, 0)
