@@ -9,43 +9,35 @@ from ButtonPress import ButtonPress
 
 #Devices
 class Devices:
-  def __init__(self, value):
+  def __init__(self, value, switch):
     self.value = value
-clip = Devices(50000)  #initial value
-lpc = Devices(50000)  #initial value
-lpq = Devices(50000)  #initial value
-hpc = Devices(50000)  #initial value
-hpq = Devices(50000)  #initial value
-bpc = Devices(50000)  #initial value
-bpq = Devices(50000)  #initial value
-bsc = Devices(50000)  #initial value
-bsq = Devices(50000)  #initial value
-
-#Function to change pot value with vertical buttons
-def ValueChangeV(value):
-  if input == ButtonPress.up:
-    value = value + inc
-  if input == ButtonPress.down:
-    value = value - inc
-    
-#Function to change pot value with horizontal buttons
-def ValueChangeH(value):
-  if input == ButtonPress.right:
-    value = value + inc
-  if input == ButtonPress.left:
-    value = value - inc
+    self.switch = switch
+clip = Devices(50000, 1)  #initial value
+lpc = Devices(50000, 1)  #initial value - Ignoring switch val for cutoff freq
+lpq = Devices(50000, 1)  #initial value
+hpc = Devices(50000, 1)  #initial value - Ignoring switch val for cutoff freq
+hpq = Devices(50000, 1)  #initial value
+bpc = Devices(50000, 1)  #initial value - Ignoring switch val for cutoff freq
+bpq = Devices(50000, 1)  #initial value
+bsc = Devices(50000, 1)  #initial value - Ignoring switch val for cutoff freq
+bsq = Devices(50000, 1)  #initial value
 
 # A different subclass for each state:
 class Clipping(State):
   def run(self, input):
+    if clip.switch == 1:
+      if input == ButtonPress.up:
+        clip.value += inc
+        comtodual(Clip, clip.value)
+      if input == ButtonPress.down:
+        clip.value -= inc
+        comtodual(Clip, clip.value)
     if input == ButtonPress.on:
-      #Give value to swtich dev
+      clip.switch = 1
+      comtosw(ClipSw, clip.switch)
     if input == ButtonPress.off:
-      #Give value to swtich dev
-    if #switch dev on:
-      clip.value = ValueChangeV(clip.value)
-      data_out = {addr, 0b00, clip.value}    #NEEDS FIXING
-      #turn on clipping device cs, set MOSI to data out, turn off cs
+      clip.switch = 0
+      comtosw(ClipSw, clip.switch)
   def next(self, input):
     if input == ButtonPress.sel:
       return Filters.lowpass
@@ -53,17 +45,25 @@ class Clipping(State):
 
 class LowPass(State):
   def run(self, input):
+    if lpq.switch == 1:
+      if input == ButtonPress.up:
+        lpq.value += inc
+        comtosing(LPq, lpq.value)
+      if input == ButtonPress.down:
+        lpq.value -= inc
+        comtosing(LPq, lpq.value)
+      if input == ButtonPress.right:
+        lpc.value += inc
+        comtodual(LPc, lpc.value)
+      if input == ButtonPress.left:
+        lpc.value -= inc
+        comtodual(LPc, lpc.value)
     if input == ButtonPress.on:
-      #Give value to swtich dev
+      lpq.switch = 1
+      comtosw(LPSw, lpq.switch)
     if input == ButtonPress.off:
-      #Give value to swtich dev
-    if #switch dev on:
-      lpq.value = ValueChangeV(lpq.value)
-      data_out = {addr, 0b00, lpq.value}   #NEEDS FIXING
-      #turn on lpq device cs, set MOSI to data out, turn off cs
-      lpc.value = ValueChangeH(lpc.value)
-      data_out = {addr, 0b00, lpc.value}   #NEEDS FIXING
-      #turn on lpc device cs, set MOSI to data out, turn off cs
+      lpq.switch = 0
+      comtosw(LPSw, lpq.switch)
   def next(self, input):
     if input == ButtonPress.sel:
       return Filters.highpass
@@ -71,17 +71,25 @@ class LowPass(State):
 
 class HighPass(State):
   def run(self, input):
+    if hpq.switch == 1:
+      if input == ButtonPress.up:
+        hpq.value += inc
+        comtosing(HPq, hpq.value)
+      if input == ButtonPress.down:
+        hpq.value -= inc
+        comtosing(HPq, hpq.value)
+      if input == ButtonPress.right:
+        hpc.value += inc
+        comtodual(HPc, hpc.value)
+      if input == ButtonPress.left:
+        hpc.value -= inc
+        comtodual(HPc, hpc.value)
     if input == ButtonPress.on:
-      #Give value to swtich dev
+      hpq.switch = 1
+      comtosw(HPSw, hpq.switch)
     if input == ButtonPress.off:
-      #Give value to swtich dev
-    if #switch dev on:
-      hpq.value = ValueChangeV(hpq.value)
-      data_out = {addr, 0b00, hpq.value}   #NEEDS FIXING
-      #turn on hpq device cs, set MOSI to data out, turn off cs
-      hpc.value = ValueChangeH(hpc.value)
-      data_out = {addr, 0b00, hpc.value}   #NEEDS FIXING
-      #turn on hpc device cs, set MOSI to data out, turn off cs
+      hpq.switch = 0
+      comtosw(HPSw, hpq.switch)
   def next(self, input):
     if input == ButtonPress.sel:
       return Filters.bandpass
@@ -89,17 +97,25 @@ class HighPass(State):
   
 class BandPass(State):
   def run(self, input):
+    if bpq.switch == 1:
+      if input == ButtonPress.up:
+        bpq.value += inc
+        comtosing(BPq, bpq.value)
+      if input == ButtonPress.down:
+        bpq.value -= inc
+        comtosing(BPq, bpq.value)
+      if input == ButtonPress.right:
+        bpc.value += inc
+        comtodual(BPc, bpc.value)
+      if input == ButtonPress.left:
+        bpc.value -= inc
+        comtodual(BPc, bpc.value)
     if input == ButtonPress.on:
-      #Give value to swtich dev
+      bpq.switch = 1
+      comtosw(BPSw, bpq.switch)
     if input == ButtonPress.off:
-      #Give value to swtich dev
-    if #switch dev on:
-      bpq.value = ValueChangeV(bpq.value)
-      data_out = {addr, 0b00, bpq.value}   #NEEDS FIXING
-      #turn on bpq device cs, set MOSI to data out, turn off cs
-      bpc.value = ValueChangeH(bpc.value)
-      data_out = {addr, 0b00, bpc.value}   #NEEDS FIXING
-      #turn on bpc device cs, set MOSI to data out, turn off cs
+      bpq.switch = 0
+      comtosw(BPSw, bpq.switch)
   def next(self, input):
     if input == ButtonPress.sel:
       return Filters.bandstop
@@ -107,17 +123,25 @@ class BandPass(State):
   
 class BandStop(State):
   def run(self, input):
+    if bsq.switch == 1:
+      if input == ButtonPress.up:
+        bsq.value += inc
+        comtosing(BSq, bsq.value)
+      if input == ButtonPress.down:
+        bsq.value -= inc
+        comtosing(BSq, bsq.value)
+      if input == ButtonPress.right:
+        bsc.value += inc
+        comtodual(BSc, bsc.value)
+      if input == ButtonPress.left:
+        bsc.value -= inc
+        comtodual(BSc, bsc.value)
     if input == ButtonPress.on:
-      #Give value to swtich dev
+      bsq.switch = 1
+      comtosw(BSSw, bsq.switch)
     if input == ButtonPress.off:
-      #Give value to swtich dev
-    if #switch dev on:
-      bsq.value = ValueChangeV(bsq.value)
-      data_out = {addr, 0b00, bsq.value}   #NEEDS FIXING
-      #turn on bsq device cs, set MOSI to data out, turn off cs
-      hpc.value = ValueChangeH(bsc.value)
-      data_out = {addr, 0b00, bsc.value}   #NEEDS FIXING
-      #turn on bsc device cs, set MOSI to data out, turn off cs
+      bsq.switch = 0
+      comtosw(BSSw, bsq.switch)
   def next(self, input):
     if input == ButtonPress.sel:
       return Filters.Clipping
