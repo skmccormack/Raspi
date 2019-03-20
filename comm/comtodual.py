@@ -1,0 +1,2 @@
+def comtodual(pot, value):
+
