@@ -11,15 +11,15 @@ from ButtonPress import ButtonPress
 class Devices:
   def __init__(self, value):
     self.value = value
-clip = Devices(100)  #initial value
-lpc = Devices(100)  #initial value
-lpq = Devices(100)  #initial value
-hpc = Devices(100)  #initial value
-hpq = Devices(100)  #initial value
-bpc = Devices(100)  #initial value
-bpq = Devices(100)  #initial value
-bsc = Devices(100)  #initial value
-bsq = Devices(100)  #initial value
+clip = Devices(50000)  #initial value
+lpc = Devices(50000)  #initial value
+lpq = Devices(50000)  #initial value
+hpc = Devices(50000)  #initial value
+hpq = Devices(50000)  #initial value
+bpc = Devices(50000)  #initial value
+bpq = Devices(50000)  #initial value
+bsc = Devices(50000)  #initial value
+bsq = Devices(50000)  #initial value
 
 #Function to change pot value with vertical buttons
 def ValueChangeV(value):
