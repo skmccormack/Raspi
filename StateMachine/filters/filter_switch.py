@@ -1,11 +1,12 @@
 # StateMachine/filters/filter_switch.py
 # State Machine pattern using 'if' statements
 # to determine the next state.
-import string, sys
-sys.path += ['../StateMachine', '../button']
-from State import State
+import string, sys #needs edit
+sys.path += ['../StateMachine', '../button', '../comm']
+from StateMachine import State
 from StateMachine import StateMachine
-from ButtonPress import ButtonPress
+from button import buttonPress
+from comm import configure
 
 #Devices
 class Devices:
