@@ -26,11 +26,11 @@ bsq = Devices(50000, 1)  #initial value
 # A different subclass for each state:
 class Clipping(State):
   def run(self, input):
-    if clip.switch == 1:
-      if input == ButtonPress.up:
+    if clip.switch:
+      if input == ButtonPress.up && clip.value < 255:
         clip.value += inc
         comtodual(Clip, clip.value)
-      if input == ButtonPress.down:
+      if input == ButtonPress.down && clip.value > 0:
         clip.value -= inc
         comtodual(Clip, clip.value)
     if input == ButtonPress.on:
@@ -47,16 +47,16 @@ class Clipping(State):
 class LowPass(State):
   def run(self, input):
     if lpq.switch == 1:
-      if input == ButtonPress.up:
+      if input == ButtonPress.up && lpq.value < 255:
         lpq.value += inc
         comtosing(LPq, lpq.value)
-      if input == ButtonPress.down:
+      if input == ButtonPress.down && lpq.value > 0:
         lpq.value -= inc
         comtosing(LPq, lpq.value)
-      if input == ButtonPress.right:
+      if input == ButtonPress.right && lpc.value < 255:
         lpc.value += inc
         comtodual(LPc, lpc.value)
-      if input == ButtonPress.left:
+      if input == ButtonPress.left && lpc.value > 0:
         lpc.value -= inc
         comtodual(LPc, lpc.value)
     if input == ButtonPress.on:
