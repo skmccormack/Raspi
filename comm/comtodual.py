@@ -1,3 +1,8 @@
+# Communication actions
+import string, sys #needs edit
+sys.path += ['../comm']
+from comm import configure
+
 def increment(value, pottype):
     if value < 250:
         value += 1
