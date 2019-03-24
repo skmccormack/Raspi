@@ -73,16 +73,16 @@ class LowPass(State):
 class HighPass(State):
   def run(self, input):
     if hpq.switch == 1:
-      if input == ButtonPress.up:
+      if input == ButtonPress.up && hpq.value < 255:
         hpq.value += inc
         comtosing(HPq, hpq.value)
-      if input == ButtonPress.down:
+      if input == ButtonPress.down && hpq.value > 0:
         hpq.value -= inc
         comtosing(HPq, hpq.value)
-      if input == ButtonPress.right:
+      if input == ButtonPress.right hpc.value < 255:
         hpc.value += inc
         comtodual(HPc, hpc.value)
-      if input == ButtonPress.left:
+      if input == ButtonPress.left && hpc.value > 0:
         hpc.value -= inc
         comtodual(HPc, hpc.value)
     if input == ButtonPress.on:
@@ -99,16 +99,16 @@ class HighPass(State):
 class BandPass(State):
   def run(self, input):
     if bpq.switch == 1:
-      if input == ButtonPress.up:
+      if input == ButtonPress.up && bpq.value < 255:
         bpq.value += inc
         comtosing(BPq, bpq.value)
-      if input == ButtonPress.down:
+      if input == ButtonPress.down && bpq.value > 0:
         bpq.value -= inc
         comtosing(BPq, bpq.value)
-      if input == ButtonPress.right:
+      if input == ButtonPress.right && bpc.value < 255:
         bpc.value += inc
         comtodual(BPc, bpc.value)
-      if input == ButtonPress.left:
+      if input == ButtonPress.left && bpc.value > 0:
         bpc.value -= inc
         comtodual(BPc, bpc.value)
     if input == ButtonPress.on:
@@ -125,16 +125,16 @@ class BandPass(State):
 class BandStop(State):
   def run(self, input):
     if bsq.switch == 1:
-      if input == ButtonPress.up:
+      if input == ButtonPress.up && bsq.value < 255:
         bsq.value += inc
         comtosing(BSq, bsq.value)
-      if input == ButtonPress.down:
+      if input == ButtonPress.down && bsq.value > 0:
         bsq.value -= inc
         comtosing(BSq, bsq.value)
-      if input == ButtonPress.right:
+      if input == ButtonPress.right && bsc.value < 255:
         bsc.value += inc
         comtodual(BSc, bsc.value)
-      if input == ButtonPress.left:
+      if input == ButtonPress.left && bsc.value > 0:
         bsc.value -= inc
         comtodual(BSc, bsc.value)
     if input == ButtonPress.on:
