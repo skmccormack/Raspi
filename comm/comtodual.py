@@ -5,6 +5,7 @@ def increment(value, pottype):
             #Write to dual pot the new value
         else:
             #Write to singular pot the new value
+    return value
 
 def decrement(value, pottype):
     if value > 0:
@@ -13,6 +14,7 @@ def decrement(value, pottype):
             #Write to dual pot the new value
         else:
             #Write to singular pot the new value
+    return value
 
 def comtosw(dev, value)
     if value == 1:
