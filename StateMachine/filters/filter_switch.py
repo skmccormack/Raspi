@@ -50,9 +50,9 @@ class LowPass(State):
       if input == ButtonPress.down:
         lpq.value = decrement(lpq.value, 1)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
       if input == ButtonPress.right:
-        lpc.value = increment(lpc.value, 0)         #Have if statement for max value, write to pot in function, take 1 as dual, return new value
+        lpc.value = increment(lpc.value, 0)         #Have if statement for max value, write to pot in function, take 0 as singular, return new value
       if input == ButtonPress.left:
-        lpc.value = decrement(lpc.value, 0)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
+        lpc.value = decrement(lpc.value, 0)         #Have if statement for min value, write to pot in function, take 0 as singular, return new value
     if input == ButtonPress.on:
       lpq.switch = 1
       comtosw(LPSw, lpq.switch)
@@ -72,9 +72,9 @@ class HighPass(State):
       if input == ButtonPress.down:
         hpq.value = decrement(hpq.value, 1)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
       if input == ButtonPress.right:
-        hpc.value = increment(hpc.value, 0)         #Have if statement for max value, write to pot in function, take 1 as dual, return new value
+        hpc.value = increment(hpc.value, 0)         #Have if statement for max value, write to pot in function, take 0 as singular, return new value
       if input == ButtonPress.left:
-        hpc.value = decrement(hpc.value, 0)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
+        hpc.value = decrement(hpc.value, 0)         #Have if statement for min value, write to pot in function, take 0 as singular, return new value
     if input == ButtonPress.on:
       hpq.switch = 1
       comtosw(HPSw, hpq.switch)
@@ -94,9 +94,9 @@ class BandPass(State):
       if input == ButtonPress.down:
         bpq.value = decrement(bpq.value, 1)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
       if input == ButtonPress.right:
-        bpc.value = increment(bpc.value, 0)         #Have if statement for max value, write to pot in function, take 1 as dual, return new value
+        bpc.value = increment(bpc.value, 0)         #Have if statement for max value, write to pot in function, take 0 as singular, return new value
       if input == ButtonPress.left:
-        bpc.value = decrement(bpc.value, 0)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
+        bpc.value = decrement(bpc.value, 0)         #Have if statement for min value, write to pot in function, take 0 as singular, return new value
     if input == ButtonPress.on:
       bpq.switch = 1
       comtosw(BPSw, bpq.switch)
@@ -116,9 +116,9 @@ class BandStop(State):
       if input == ButtonPress.down:
         bsq.value = decrement(bsq.value, 1)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
       if input == ButtonPress.right:
-        bsc.value = increment(bsc.value, 0)         #Have if statement for max value, write to pot in function, take 1 as dual, return new value
+        bsc.value = increment(bsc.value, 0)         #Have if statement for max value, write to pot in function, take 0 as singular, return new value
       if input == ButtonPress.left:
-        bsc.value = decrement(bsc.value, 0)         #Have if statement for min value, write to pot in function, take 1 as dual, return new value
+        bsc.value = decrement(bsc.value, 0)         #Have if statement for min value, write to pot in function, take 0 as singular, return new value
     if input == ButtonPress.on:
       bsq.switch = 1
       comtosw(BSSw, bsq.switch)
