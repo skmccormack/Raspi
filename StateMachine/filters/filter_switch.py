@@ -7,6 +7,7 @@ from StateMachine import State
 from StateMachine import StateMachine
 from button import buttonPress
 from comm import configure
+from comm import comtodev
 
 #Devices
 class Devices:
